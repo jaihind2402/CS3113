@@ -64,45 +64,45 @@ template <typename T>
 */
 
 void LinkedList<T>::add(T payload) {
-    // ListNode<T> *new_node = new ListNode<T>(payload);
-    // ListNode<T> *current = head;
-    // ListNode<T> *prev = nullptr;
-
-    // while (current != nullptr && current->getPayload() < payload) {
-    //     prev = current;
-    //     current = current->getNext();
-    // }
-
-    // if (prev == nullptr) {
-    //     new_node->setNext(head);
-    //     head = new_node;
-    // } else {
-    //     prev->setNext(new_node);
-    //     new_node->setNext(current);
-    // }
-
-    // if (current == nullptr) {
-    //     tail = new_node;
-    // }
     ListNode<T> *new_node = new ListNode<T>(payload);
-    if (head == nullptr) {
-        head = new_node;
-        tail = new_node;
-    } else {
-        ListNode<T> *current = head;
-        ListNode<T> *prev = nullptr;
-        while (current != nullptr && current->getPayload() < payload) {
-            prev = current;
-            current = current->getNext(0);
-        }
-        if (prev == nullptr) {
-            new_node->setNext(head,0);
-            head = new_node;
-        } else {
-            new_node->setNext(current,0);
-            prev->setNext(new_node,0);
-        }
+    ListNode<T> *current = head;
+    ListNode<T> *prev = nullptr;
+
+    while (current != nullptr && current->getPayload() < payload) {
+        prev = current;
+        current = current->getNext(0);
     }
+
+    if (prev == nullptr) {
+        new_node->setNext(head,0);
+        head = new_node;
+    } else {
+        prev->setNext(new_node,0);
+        new_node->setNext(current,0);
+    }
+
+    if (current == nullptr) {
+        tail = new_node;
+    }
+    // ListNode<T> *new_node = new ListNode<T>(payload);
+    // if (head == nullptr) {
+    //     head = new_node;
+    //     tail = new_node;
+    // } else {
+    //     ListNode<T> *current = head;
+    //     ListNode<T> *prev = nullptr;
+    //     while (current != nullptr && current->getPayload() < payload) {
+    //         prev = current;
+    //         current = current->getNext(0);
+    //     }
+    //     if (prev == nullptr) {
+    //         new_node->setNext(head,0);
+    //         head = new_node;
+    //     } else {
+    //         new_node->setNext(current,0);
+    //         prev->setNext(new_node,0);
+    //     }
+    // }
 }
 
 
