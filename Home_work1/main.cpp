@@ -18,9 +18,12 @@ int main() {
 
   for (int i = 0; i < 10; i++) intList.add(i);
 
-  intList.remove(5);
-  intList.remove(7);
-
+  intList.add(5);
+  intList.add(7);
+  intList.add(11);
+  intList.add(2);
+  // intList.remove(5);
+  // intList.remove(7);
   std::cout << intList;
 
   return 0;

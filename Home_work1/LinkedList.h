@@ -50,7 +50,9 @@ private:
  */
 // TODO - FILL IN FUNCTION
 template <typename T>
-void LinkedList<T>::add(T payload)
+/**
+ * Intital add method just to add the numbers from the home work 1 continuation
+ void LinkedList<T>::add(T payload)
 {
   ListNode<T> *new_node = new ListNode<T>(payload);
 
@@ -59,6 +61,32 @@ void LinkedList<T>::add(T payload)
   new_node->setNext(head);
   head = new_node;
 }
+*/
+
+void LinkedList<T>::add(T payload) {
+    ListNode<T> *new_node = new ListNode<T>(payload);
+    ListNode<T> *current = head;
+    ListNode<T> *prev = nullptr;
+
+    while (current != nullptr && current->getPayload() < payload) {
+        prev = current;
+        current = current->getNext();
+    }
+
+    if (prev == nullptr) {
+        new_node->setNext(head);
+        head = new_node;
+    } else {
+        prev->setNext(new_node);
+        new_node->setNext(current);
+    }
+
+    if (current == nullptr) {
+        tail = new_node;
+    }
+}
+
+
 
 /**
  * @brief This function searches and removes a value from the list
@@ -72,7 +100,7 @@ void LinkedList<T>::remove(T target)
 {
   if (head == nullptr)
     throw std::length_error{"unable to delete"};
-  else
+  elsez
   {
     ListNode<T> *temp = head;
     while (temp != nullptr && temp->getNext()->getPayload() != target)
