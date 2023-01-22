@@ -64,25 +64,44 @@ template <typename T>
 */
 
 void LinkedList<T>::add(T payload) {
+    // ListNode<T> *new_node = new ListNode<T>(payload);
+    // ListNode<T> *current = head;
+    // ListNode<T> *prev = nullptr;
+
+    // while (current != nullptr && current->getPayload() < payload) {
+    //     prev = current;
+    //     current = current->getNext();
+    // }
+
+    // if (prev == nullptr) {
+    //     new_node->setNext(head);
+    //     head = new_node;
+    // } else {
+    //     prev->setNext(new_node);
+    //     new_node->setNext(current);
+    // }
+
+    // if (current == nullptr) {
+    //     tail = new_node;
+    // }
     ListNode<T> *new_node = new ListNode<T>(payload);
-    ListNode<T> *current = head;
-    ListNode<T> *prev = nullptr;
-
-    while (current != nullptr && current->getPayload() < payload) {
-        prev = current;
-        current = current->getNext();
-    }
-
-    if (prev == nullptr) {
-        new_node->setNext(head);
+    if (head == nullptr) {
         head = new_node;
-    } else {
-        prev->setNext(new_node);
-        new_node->setNext(current);
-    }
-
-    if (current == nullptr) {
         tail = new_node;
+    } else {
+        ListNode<T> *current = head;
+        ListNode<T> *prev = nullptr;
+        while (current != nullptr && current->getPayload() < payload) {
+            prev = current;
+            current = current->getNext(0);
+        }
+        if (prev == nullptr) {
+            new_node->setNext(head,0);
+            head = new_node;
+        } else {
+            new_node->setNext(current,0);
+            prev->setNext(new_node,0);
+        }
     }
 }
 
@@ -100,20 +119,20 @@ void LinkedList<T>::remove(T target)
 {
   if (head == nullptr)
     throw std::length_error{"unable to delete"};
-  elsez
+  else
   {
     ListNode<T> *temp = head;
-    while (temp != nullptr && temp->getNext()->getPayload() != target)
+    while (temp != nullptr && temp->getNext(0)->getPayload() != target)
     {
-      temp = temp->getNext();
+      temp = temp->getNext(0);
     }
     // std::cout << "ele found" << temp->getNext()->getPayload() << std::endl;
     if (temp == nullptr)
       std::cout << "element not found";
     else
     {
-      ListNode<T> *deleteEle = temp->getNext();
-      temp->setNext(deleteEle->getNext());
+      ListNode<T> *deleteEle = temp->getNext(0);
+      temp->setNext(deleteEle->getNext(0),0);
       delete deleteEle;
     }
   }
@@ -130,7 +149,7 @@ void LinkedList<T>::clearList()
   ListNode<T> *current = head;
   while (current != nullptr)
   {
-    head = current->getNext();
+    head = current->getNext(0);
     delete current;
     current = head;
   }
@@ -150,7 +169,7 @@ std::ostream &LinkedList<T>::print(std::ostream &strm) const
   while (current != nullptr)
   {
     strm << *current << " -> ( ";
-    current = current->getNext();
+    current = current->getNext(0);
 
     if (current == nullptr)
       strm << "/ )" << std::endl;

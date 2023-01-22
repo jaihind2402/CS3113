@@ -14,6 +14,72 @@
 
 #include <iostream>
 
+/**
+ * 
+*/
+// template <typename T>
+// class ListNode {
+//  public:
+//   /**
+//    * @brief Construct a new List Node object
+//    * 
+//    * @param payload 
+//    */
+//   ListNode(T payload) : payload{payload}, next{nullptr} {}
+  
+//   /**
+//    * @brief Remove default constructor
+//    * 
+//    */
+//   ListNode() = delete;
+
+//   /**
+//    * @brief Set the Next object
+//    * 
+//    * @param newNext 
+//    */
+//   void setNext(ListNode *newNext) { next = newNext; }
+  
+//   /**
+//    * @brief Get the Next object
+//    * 
+//    * @return ListNode* 
+//    */
+//   ListNode *getNext() { return next; }
+  
+//   /**
+//    * @brief Print payload of Node object.
+//    * 
+//    * @param strm 
+//    * @return std::ostream& 
+//    */
+//   std::ostream &print(std::ostream &strm) const { return strm << payload; }
+  
+//   /**
+//    * @brief Get the Payload object
+//    * 
+//    * @return const T& 
+//    */
+//   const T &getPayload() { return payload; }
+
+//  private:
+//   const T payload;
+//   ListNode *next;
+// };
+
+// /**
+//  * @brief 
+//  * 
+//  * @tparam T 
+//  * @param strm 
+//  * @param node 
+//  * @return std::ostream& 
+//  */
+// template <typename T>
+// std::ostream &operator<<(std::ostream &strm, const ListNode<T> &node) {
+//   return node.print(strm);
+// }
+
 template <typename T>
 class ListNode {
  public:
@@ -22,7 +88,11 @@ class ListNode {
    * 
    * @param payload 
    */
-  ListNode(T payload) : payload{payload}, next{nullptr} {}
+  ListNode(T payload) : payload{payload} {
+      for (int i = 0; i < 100; i++) {
+          nexts[i] = nullptr;
+      }
+  }
   
   /**
    * @brief Remove default constructor
@@ -34,15 +104,21 @@ class ListNode {
    * @brief Set the Next object
    * 
    * @param newNext 
+   * @param level
    */
-  void setNext(ListNode *newNext) { next = newNext; }
+  void setNext(ListNode *newNext, int level) { 
+      nexts[level] = newNext; 
+  }
   
   /**
    * @brief Get the Next object
    * 
+   * @param level
    * @return ListNode* 
    */
-  ListNode *getNext() { return next; }
+  ListNode *getNext(int level) { 
+      return nexts[level]; 
+  }
   
   /**
    * @brief Print payload of Node object.
@@ -61,20 +137,11 @@ class ListNode {
 
  private:
   const T payload;
-  ListNode *next;
+  ListNode *nexts[100];
 };
 
-/**
- * @brief 
- * 
- * @tparam T 
- * @param strm 
- * @param node 
- * @return std::ostream& 
- */
 template <typename T>
 std::ostream &operator<<(std::ostream &strm, const ListNode<T> &node) {
   return node.print(strm);
 }
-
 #endif

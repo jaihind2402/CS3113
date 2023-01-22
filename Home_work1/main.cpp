@@ -22,8 +22,8 @@ int main() {
   intList.add(7);
   intList.add(11);
   intList.add(2);
-  // intList.remove(5);
-  // intList.remove(7);
+  intList.remove(5);
+  intList.remove(7);
   std::cout << intList;
 
   return 0;
